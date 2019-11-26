@@ -1,0 +1,338 @@
+@import "mixins";
+
+$nav-bg: #e6e6fa;
+$nav-fontcolor: #000;
+$box-1: #ed1164; 
+$box-2: #86328c;
+$submit-button: #ff5722;
+$reset-button: #ff0000;
+
+/* Responsive slide-menu */
+.nav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: $nav-bg;
+    opacity: .9;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.7s;
+  
+    a {
+      display: block;
+      padding: 20px 30px;
+      font-size: 25px;
+      text-decoration: none;
+      color: $nav-fontcolor;
+  
+      &:hover {
+        color: lighten($nav-fontcolor, 50%);
+        font-size: 27px;
+        transition: 0.4s;
+      }
+    }
+  }
+  
+  #hamburger {
+    color: white;
+    font-size: 50px;
+    padding-left: 2%;
+    padding-top: 1%;
+  }
+  
+  .nav .close {
+    position: absolute;
+    top: 0;
+    right: 22px;
+    margin-left: 50px;
+    font: 30px;
+  }
+
+  /* Interactive boxes @index.html */
+  .box-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .box {
+    position: relative;
+    width: 350px;
+    padding: 40px;
+    background: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    margin: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .icon {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    color: white;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    border-radius: 50%;
+    font-size: 30px;
+    font-weight: 700;
+    transition: 0.5s;
+  }
+
+  &:nth-child(1) .box {
+    .icon {
+      box-shadow: 0 0 0 0 #ed1164;
+      background: #ed1164;
+    }
+
+    &:hover .icon {
+      box-shadow: 0 0 0 400px #ed1164;
+    }
+  }
+
+  &:nth-child(2) {
+    .box .icon {
+      box-shadow: 0 0 0 0 #86328c;
+      background: #86328c;
+    }
+
+    &:hover .box .icon {
+      box-shadow: 0 0 0 400px #86328c;
+    }
+  }
+
+  .box {
+    .list-content {
+      position: relative;
+      z-index: 1;
+      transition: 0.5s;
+      text-align: center;
+      background-color: transparent;
+    }
+
+    &:hover .list-content {
+      color: white;
+    }
+
+    .list-content {
+      h3 {
+        font-size: 20px;
+        margin: 10px 0;
+        padding: 0;
+        text-align: center;
+      }
+
+      ul {
+        list-style-type: none;
+        font-weight: 700;
+      }
+
+      a {
+        display: inline-block;
+        padding: 10px 20px;
+        background: white;
+        border-radius: 4px;
+        text-decoration: none;
+        color: #000;
+        font-weight: 500;
+        margin-top: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+}
+
+  /* Standard button */
+  .btn {
+    border-color: transparent;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    height: 50px;
+    margin-top: 20px;
+    width: auto;
+    padding: 2%;
+    border-radius: 20%;
+  }
+
+
+.add {
+  background-color: #4CAF50;
+  margin-left: 5%;
+}
+
+.delete {
+  background-color: #f44336;
+}
+
+input[type=text], [type=password] {
+  width: 65%;
+  padding: 9px 18px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+input[list] {
+  width: 20%;
+  margin-right: 30%;
+}
+
+
+  /* Timeline cv.html */
+  .body-wrapper {
+  background: linear-gradient(rgba(58, 58, 68, 0.5), rgba(50, 50, 51, 0.5)), url(../../images/notebook.jpeg);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: auto;
+}
+
+.timeline-container {
+  width: 45%;
+  margin-left: 5%;
+  display: inline-block;
+  padding: 2%;
+  vertical-align: top;
+}
+
+@media screen and (max-width: 767px) {
+  .timeline-container {
+    width: 100%;
+    display: block;
+    margin-left: 0;
+  }
+}
+
+.list-container {
+  display: inline-block;
+  width: 45%;
+  padding: 2%;
+  vertical-align: top;
+}
+
+@media screen and (max-width: 767px) {
+  .list-container {
+    width: 100%;
+    display: block;
+  }
+}
+
+.timeline-container h2, .list-container h2 {
+  color: white;
+  text-align: center;
+}
+
+/* The actual timeline (the vertical ruler) */
+
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin-left: 5%;
+}
+
+.timeline-container h3, .list-container h3 {
+  text-align: center;
+}
+
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  background-color: white;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -3px;
+}
+
+/* Container around content */
+
+.container {
+  padding: 10px 40px;
+  position: relative;
+  background-color: inherit;
+  width: 60%;
+  margin: 2% 20%;
+}
+
+/* The actual content */
+
+.content {
+  padding: 20px 30px;
+  background-color: white;
+  position: relative;
+  border-radius: 6px;
+  z-index: 2;
+}
+.tl-name {
+  font-weight: bold;
+  text-align: center;
+  font-size: 18px;
+}
+
+.tl-desc {
+  font-style: italic;
+}
+ 
+
+  /* Portfolio boxes */
+  .portfolio-container {
+    background: linear-gradient(rgba(58, 58, 68, 0.5), rgba(50, 50, 51, 0.5)), url(../../images/code.jpeg);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: auto;
+    overflow: hidden;
+  }
+  
+  .website-box {
+    width: 60%;
+    border: 2px solid black;
+    margin: 5% 20%;
+    padding: 3%;
+    transition: transform .2s;
+    overflow: hidden;
+    background-color: #787c7f;
+    @include breakpoint(phone) {
+      width: 80%; margin: 5% 10%;
+    }
+    
+    /* Animation */
+    &:hover {
+      transform: scale(1.3);
+      background-color: aliceblue;
+    }
+  }
+  
+  
+  .webinfo {
+    width: 60%;
+    padding: 4%;
+    margin: 3% 20%;
+    @include breakpoint(phone) {
+      float: none; width: 100%;
+    }
+  
+    .title {
+      font-size: 28px;
+      text-align: center;
+    }
+  
+    .created {
+      text-align: center;
+      margin-bottom: 3%;
+    }
+  
+    .web-url {
+      text-align: center;
+      margin-top: 4%;
+    }
+  }
