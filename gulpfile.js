@@ -1,6 +1,5 @@
 const {src, dest, watch, series, parallel} = require("gulp");
 const browserSync = require('browser-sync').create();
-const concat = require("gulp-concat");
 const imagemin = require('gulp-imagemin');
 const uglifyjs = require('gulp-uglify-es').default;
 const babel = require('gulp-babel');
@@ -10,15 +9,15 @@ sass.compiler = require('node-sass');
 
 /* Get path to files */
 const files = {
-  htmlPath: "src/*.html",
+  phpPath: "src/*.php",
   sassPath: "src/**/*.scss",
   jsPath: "src/**/*.js",
   imagePath: "src/images/*"
 }
 
-  /* Task: Get all HTML-files och push to pub */
-  function copyHTML() {
-    return src(files.htmlPath)
+  /* Task: Get all PHP-files och push to pub */
+  function copyPHP() {
+    return src(files.phpPath)
       .pipe(dest('pub'))
       .pipe(browserSync.stream());
   }
@@ -30,7 +29,7 @@ const files = {
       .pipe(dest('pub/css')
       );
   }
-  /* Task: Get all JS-files, convert them with Babel, then concat, uglify and push to pub */
+  /* Task: Get all JS-files, convert them with Babel, uglify and push to pub */
   function jsTask() {
     return src([files.jsPath])
       .pipe(babel({
@@ -40,9 +39,8 @@ const files = {
           }]
         ]
       }))
-      .pipe(concat('main.js'))
       .pipe(uglifyjs())
-      .pipe(dest('pub/js'))
+      .pipe(dest('pub/'))
       .pipe(browserSync.stream());
   }
 
@@ -61,12 +59,12 @@ const files = {
             baseDir: 'pub/'
         }
     });
-    watch([files.htmlPath, files.jsPath, files.sassPath, files.imagePath],
-      parallel(copyHTML, jsTask, sassTask, imageTask)
+    watch([files.phpPath, files.jsPath, files.sassPath, files.imagePath],
+      parallel(copyPHP, jsTask, sassTask, imageTask)
       ).on('change', browserSync.reload);
   }
 
   /* Exports a series of tasks */
   exports.default = series(
-    parallel(copyHTML, jsTask, sassTask, imageTask),
+    parallel(copyPHP, jsTask, sassTask, imageTask),
     watchTask);
